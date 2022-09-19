@@ -385,29 +385,28 @@ charactersLength));
   }
   function generate1Payment(){
 
-    var senderId = generateRandomID();
-    //alert(senderId);
-    var receiverId = generateRandomID();
-    //alert(receiverId);
+    var sndId = generateRandomID();
+    var rcvrId = generateRandomID();
     var siban = generateRandomIBAN();
     var riban = generateRandomIBAN();
     var sbank = getRandomBankName();
     var rbank = getRandomBankName();
     //alert (siban + "|" + riban + "|" + sbank + "|" + rbank);
-    setSenderId(senderId);
-    setReceiverId(receiverId);
-    setSenderIban(siban);
-    setReceiverIban(riban);
-    setSenderBankId(sbank);
-    setReceiverBankId(rbank);
-    setPaymentAmount("1000.00");
+    
+    senderId.current.value=sndId;
+    receiverId.current.value=rcvrId;
+    senderIban.current.value=siban;
+    receiverIban.current.value=riban;
+    senderBankId.current.value=sbank;
+    receiverBankId.current.value=rbank;
+    paymentAmt.current.value="1000.00";
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
 
     today = dd + '/' + mm + '/' + yyyy;
-    setValueDate(today);
+    valueDate.current.value=today;
 
   }
    let handleSubmit = async (e) => {

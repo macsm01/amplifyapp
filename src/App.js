@@ -417,6 +417,7 @@ charactersLength));
         headers: { },
         method: "POST",
         body: JSON.stringify({
+          "Records": [{
           "senderId": senderId,
           "receiverId": receiverId,
           "senderIban": senderIban,
@@ -425,7 +426,7 @@ charactersLength));
           "receiverBankId": receiverBankId,
           "paymentAmt": paymentAmt,
           "valueDate": valueDate,
-        }),
+        }]}),
       });
       let resJson = await res.json();
       if (res.status === 200) {

@@ -380,6 +380,7 @@ charactersLength));
       "IDFC First Bank"
   ];
 
+    
   return  bankNames[Math.floor(Math.random() * bankNames.length)];
   }
   function generate1Payment(){

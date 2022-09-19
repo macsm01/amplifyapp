@@ -414,8 +414,7 @@ charactersLength));
     try {
       generate1Payment();
       let res = await fetch("https://hayfvdlkql.execute-api.eu-west-2.amazonaws.com/v0/lambda", {
-        headers: { "Access-Control-Allow-Origin": "*",
-                 'Access-Control-Allow-Headers' : 'Origin, Content-Type, X-Auth-Token'},
+        headers: { },
         method: "POST",
         body: JSON.stringify({
           "senderId": senderId,

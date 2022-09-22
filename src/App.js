@@ -14,14 +14,14 @@ function App({ signOut, user }) {
 
 
 
-  const senderId = useRef(null);
-  const receiverId = useRef(null);
-  const senderIban = useRef(null);
-  const receiverIban = useRef(null);
-  const senderBankId = useRef(null);
-  const receiverBankId = useRef(null);
-  const paymentAmt = useRef(null);
-  const valueDate = useRef(null);
+  const senderId = useRef("");
+  const receiverId = useRef("");
+  const senderIban = useRef("");
+  const receiverIban = useRef("");
+  const senderBankId = useRef("");
+  const receiverBankId = useRef("");
+  const paymentAmt = useRef("");
+  const valueDate = useRef("");
 
 
   function makeUpperAlphaId(length) {

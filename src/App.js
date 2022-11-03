@@ -13,15 +13,23 @@ function App({ signOut, user }) {
 
 
 
-
-  const senderId = useRef("");
-  const receiverId = useRef("");
-  const senderIban = useRef("");
-  const receiverIban = useRef("");
-  const senderBankId = useRef("");
-  const receiverBankId = useRef("");
-  const paymentAmt = useRef("");
-  const valueDate = useRef("");
+  const initialPaymentData = {
+  senderId: "",
+  receiverId: "",
+  senderIban: "",
+  receiverIban: "",
+  senderBankId: "",
+  receiverBankId: "",
+  paymentAmt: ""
+   };
+  const [paymentData, setPaymentData] = useState(initialPaymentData);
+  const [valudate, setDate] = useState(new Date());
+  const updatePaymentDataHandler = useCallback(
+    (type) => (event) => {
+      setUserData({ ...paymentData, [type]: event.target.value });
+    },
+    [paymentData]
+  );
 
 
   function makeUpperAlphaId(length) {
@@ -446,24 +454,24 @@ charactersLength));
       <form onSubmit={handleSubmit}>
   
     <label for="senderId" class="senderId">Sender ID: </label>
-    <input type="text" className = "form-input" id="senderId" ref={senderId} value = {senderId} />
+    <input type="text" className = "form-input" id="senderId" value = {paymentData.senderId} onChange={updatePaymentDataHandler("senderId")}/>
     <label for="receiverId" class="receiverId">Receiver ID: </label>
-    <input type="text" className = "form-input" id="receiverId" ref={receiverId} value = {receiverId} />
+    <input type="text" className = "form-input" id="receiverId" value = {paymentData.receiverId} onChange={updatePaymentDataHandler("receiverId")} />
     <label for="senderIban" class="senderIban">Sender IBAN: </label>
-    <input type="text" className = "form-input" id="senderIban" ref={senderIban} value = {senderIban} />
+    <input type="text" className = "form-input" id="senderIban" value = {paymentData.senderIban} onChange={updatePaymentDataHandler("senderIban")}/>
     <label for="receiverIban" class="receiverIban">Receiver IBAN: </label>
-    <input type="text" className = "form-input" id="receiverIban" ref={receiverIban} value = {receiverIban} />
-    <label for="senderBankId" class="senderBankId">Sender Bank ID: </label>
-    <input type="text" className = "form-input" id="senderBankId" ref={senderBankId} value = {senderBankId} />
-    <label for="receiverBankId" class="receiverBankId">Receiver Bank ID: </label>
-    <input type="text" className = "form-input" id="receiverBankId" ref={receiverBankId} value = {receiverBankId} />
+    <input type="text" className = "form-input" id="receiverIban" value = {paymentData.receiverIban} onChange={updatePaymentDataHandler("receiverIban")}/>
+    <label for="senderBankId" class="senderBankId">Sender Bank name: </label>
+    <input type="text" className = "form-input" id="senderBankId" value = {paymentData.senderBankId} onChange={updatePaymentDataHandler("senderBankId")}/>
+    <label for="receiverBankId" class="receiverBankId">Receiver Bank name: </label>
+    <input type="text" className = "form-input" id="receiverBankId" value = {paymentData.receiverBankId} onChange={updatePaymentDataHandler("receiverBankId")}/>
     <label for="paymentAmt" class="paymentAmt">Payment Amount: </label>
-    <input type="text" className = "form-input" id="paymentAmt"  step=".01" ref={paymentAmt} value = {paymentAmt}/>
+    <input type="text" className = "form-input" id="paymentAmt"  step=".01" value = {paymentData.paymentAmt} onChange={updatePaymentDataHandler("paymentAmt")}/>
     <label for="valueDate" class="valueDate">Value date: </label>
     <DatePicker  
               id="valueDate"  
               dateFormat="dd/MM/yyyy"  
-              ref={valueDate} value = {valueDate}
+              onChange={date => setDate(date)} selected = {valudate}
           />  
   <br></br>
   <button className = "genBtn" id="genBtn" type="submit">Generate Payment</button>

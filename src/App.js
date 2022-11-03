@@ -417,41 +417,47 @@ charactersLength));
     setDate(today);
 
   }
-   let handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      generate1Payment();
-      let res = await fetch("https://hayfvdlkql.execute-api.eu-west-2.amazonaws.com/v0/lambda", {
-        headers: { },
-        method: "POST",
-        body: JSON.stringify({
-          "Records": [{
-          "senderId": paymentData.senderId,
-          "receiverId": paymentData.receiverId,
-          "senderIban": paymentData.senderIban,
-          "receiverIban": paymentData.receiverIban,
-          "senderBankId": paymentData.senderBankId,
-          "receiverBankId": paymentData.receiverBankId,
-          "paymentAmt": paymentData.paymentAmt,
-          "valueDate": valudate,
-        }]}),
-      });
-      let resJson = await res.json();
-      if (res.status === 200) {
-         alert("Payment generated successfully");
-      } else {
-        alert("Some error occured");
-      }
-    } catch (err) {
-      alert(err);
-    }
-  };
+   const formHandler = useCallback(
+    () => (event) => {
+        e.preventDefault();
+        try {
+            generate1Payment();
+            let res = await fetch("https://hayfvdlkql.execute-api.eu-west-2.amazonaws.com/v0/lambda", {
+                headers: {},
+                method: "POST",
+                body: JSON.stringify({
+                    "Records": [{
+                        "senderId": paymentData.senderId,
+                        "receiverId": paymentData.receiverId,
+                        "senderIban": paymentData.senderIban,
+                        "receiverIban": paymentData.receiverIban,
+                        "senderBankId": paymentData.senderBankId,
+                        "receiverBankId": paymentData.receiverBankId,
+                        "paymentAmt": paymentData.paymentAmt,
+                        "valueDate": valudate,
+                    }]
+                }),
+            });
+            let resJson = await res.json();
+            if (res.status === 200) {
+                alert("Payment generated successfully");
+            } else {
+                alert("Some error occured");
+            }
+        } catch (err) {
+            alert(err);
+        }
+    },
+    [paymentData, valudate]
+);
+    
+
 
   return (
     <>
       <h2>Hi {user.username}</h2>
       <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formHandler()}>
   
     <label for="senderId" class="senderId">Sender ID: </label>
     <input type="text" className = "form-input" id="senderId" value = {paymentData.senderId} onChange={updatePaymentDataHandler("senderId")}/>

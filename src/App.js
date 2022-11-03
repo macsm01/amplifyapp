@@ -27,11 +27,8 @@ function App({ signOut, user }) {
   // State variables
   const [paymentData, setPaymentData] = useState(initialPaymentData);
   const [valudate, setDate] = useState(new Date());
-  const [usrname, setUsrname] = useState();
   
-  // Retrieve authenticated user
-  Auth.currentAuthenticatedUser().then(user => setUsrname(user))
-    .catch(err => console.log(err));
+  
   
   // Update state variables as form data changes
   const updatePaymentDataHandler = useCallback(
@@ -481,7 +478,7 @@ function App({ signOut, user }) {
     <>
       <h2>Payments Manager</h2>
       <br/><br/>
-      <h2>Hi {usrname}</h2>
+      <h2>Hi {user.email}</h2>
       <div>
       <form onSubmit={handleSubmit}>
   

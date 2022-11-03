@@ -414,7 +414,7 @@ charactersLength));
     var yyyy = today.getFullYear();
 
     today = dd + '/' + mm + '/' + yyyy;
-    valudate=today;
+    valudate= setDate(today);
 
   }
    let handleSubmit = async (e) => {

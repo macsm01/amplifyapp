@@ -478,7 +478,7 @@ function App({ signOut, user }) {
     <>
       <h2>Payments Manager</h2>
       <br/><br/>
-      <h2>Hi {user.email}</h2>
+      <h2>Hi {user.username}</h2>
       <div>
       <form onSubmit={handleSubmit}>
   

@@ -486,7 +486,7 @@ charactersLength));
               onChange={date => setDate(date)} selected = {valudate}
           />  
   <br></br>
-  <button className = "genBtn" id="genBtn" onClick={generate1Payment}>Generate Payment</button>
+  <button className = "genBtn" id="genBtn" type="button" onClick={generate1Payment}>Generate Payment</button>
   <button className = "genBtn" id="subBtn" type="submit">Submit Payment</button>
   <label for="chkGenPayments" class="chkGenPayments">Generate 50 random payments (for testing only) </label>
   <input type="checkbox" id="chkGenPayments" classname="genBtn"/>

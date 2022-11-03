@@ -444,13 +444,13 @@ charactersLength));
             alert("Some error occured");
         }
         // Reset form values
-        senderId = "";
-        receiverId = "";
-        senderIban = "";
-        receiverIban = "";
-        senderBankId = "";
-        receiverBankId = "";
-        paymentAmt = "";
+        paymentData.senderId="";
+        paymentData.receiverId="";
+        paymentData.senderIban="";
+        paymentData.receiverIban="";
+        paymentData.senderBankId="";
+        paymentData.receiverBankId="";
+        paymentData.paymentAmt="";
         setDate(new Date());
     } catch (err) {
         alert(err);
@@ -463,7 +463,7 @@ charactersLength));
     <>
       <h2>Hi {user.username}</h2>
       <div>
-      <form onSubmit={formHandler()}>
+      <form onSubmit={handleSubmit}>
   
     <label for="senderId" class="senderId">Sender ID: </label>
     <input type="text" className = "form-input" id="senderId" value = {paymentData.senderId} onChange={updatePaymentDataHandler("senderId")}/>

@@ -417,39 +417,45 @@ charactersLength));
     setDate(today);
 
   }
-   const formHandler = useCallback(
-    () => (event) => {
-        e.preventDefault();
-        try {
-            generate1Payment();
-            let res = await fetch("https://hayfvdlkql.execute-api.eu-west-2.amazonaws.com/v0/lambda", {
-                headers: {},
-                method: "POST",
-                body: JSON.stringify({
-                    "Records": [{
-                        "senderId": paymentData.senderId,
-                        "receiverId": paymentData.receiverId,
-                        "senderIban": paymentData.senderIban,
-                        "receiverIban": paymentData.receiverIban,
-                        "senderBankId": paymentData.senderBankId,
-                        "receiverBankId": paymentData.receiverBankId,
-                        "paymentAmt": paymentData.paymentAmt,
-                        "valueDate": valudate,
-                    }]
-                }),
-            });
-            let resJson = await res.json();
-            if (res.status === 200) {
-                alert("Payment generated successfully");
-            } else {
-                alert("Some error occured");
-            }
-        } catch (err) {
-            alert(err);
+
+  let handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        let res = await fetch("https://hayfvdlkql.execute-api.eu-west-2.amazonaws.com/v0/lambda", {
+            headers: {},
+            method: "POST",
+            body: JSON.stringify({
+                "Records": [{
+                    "senderId": paymentData.senderId,
+                    "receiverId": paymentData.receiverId,
+                    "senderIban": paymentData.senderIban,
+                    "receiverIban": paymentData.receiverIban,
+                    "senderBankId": paymentData.senderBankId,
+                    "receiverBankId": paymentData.receiverBankId,
+                    "paymentAmt": paymentData.paymentAmt,
+                    "valueDate": valudate,
+                }]
+            }),
+        });
+        let resJson = await res.json();
+        if (res.status === 200) {
+            alert("Payment generated successfully");
+        } else {
+            alert("Some error occured");
         }
-    },
-    [paymentData, valudate]
-);
+        // Reset form values
+        senderId = "";
+        receiverId = "";
+        senderIban = "";
+        receiverIban = "";
+        senderBankId = "";
+        receiverBankId = "";
+        paymentAmt = "";
+        setDate(new Date());
+    } catch (err) {
+        alert(err);
+    }
+};
     
 
 
@@ -480,7 +486,8 @@ charactersLength));
               onChange={date => setDate(date)} selected = {valudate}
           />  
   <br></br>
-  <button className = "genBtn" id="genBtn" type="submit">Generate Payment</button>
+  <button className = "genBtn" id="genBtn" onClick={generate1Payment}>Generate Payment</button>
+  <button className = "genBtn" id="subBtn" type="submit">Submit Payment</button>
   <label for="chkGenPayments" class="chkGenPayments">Generate 50 random payments (for testing only) </label>
   <input type="checkbox" id="chkGenPayments" classname="genBtn"/>
         

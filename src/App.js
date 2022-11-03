@@ -414,7 +414,7 @@ charactersLength));
     var yyyy = today.getFullYear();
 
     today = dd + '/' + mm + '/' + yyyy;
-    valueDate.current.value=today;
+    valudate=today;
 
   }
    let handleSubmit = async (e) => {
@@ -433,7 +433,7 @@ charactersLength));
           "senderBankId": paymentData.senderBankId,
           "receiverBankId": paymentData.receiverBankId,
           "paymentAmt": paymentData.paymentAmt,
-          "valueDate": valuDate,
+          "valueDate": valudate,
         }]}),
       });
       let resJson = await res.json();

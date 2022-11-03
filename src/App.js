@@ -414,7 +414,7 @@ charactersLength));
     var yyyy = today.getFullYear();
 
     today = dd + '/' + mm + '/' + yyyy;
-    setDate(today);
+    setDate(new Date());
 
   }
 

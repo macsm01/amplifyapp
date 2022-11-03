@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";  
 import awsExports from './aws-exports';
 import './App.css';
-import React, { useState, useEffect,useRef } from 'react'; 
+import React, { useState, useEffect,useCallback } from 'react'; 
 import { useForm } from "react-hook-form";
 Amplify.configure(awsExports);
 
@@ -26,7 +26,7 @@ function App({ signOut, user }) {
   const [valudate, setDate] = useState(new Date());
   const updatePaymentDataHandler = useCallback(
     (type) => (event) => {
-      setUserData({ ...paymentData, [type]: event.target.value });
+      setPaymentData({ ...paymentData, [type]: event.target.value });
     },
     [paymentData]
   );
@@ -401,13 +401,13 @@ charactersLength));
     var rbank = getRandomBankName();
     //alert (siban + "|" + riban + "|" + sbank + "|" + rbank);
     
-    senderId.current.value=sndId;
-    receiverId.current.value=rcvrId;
-    senderIban.current.value=siban;
-    receiverIban.current.value=riban;
-    senderBankId.current.value=sbank;
-    receiverBankId.current.value=rbank;
-    paymentAmt.current.value="1000.00";
+    paymentData.senderId=sndId;
+    paymentData.receiverId=rcvrId;
+    paymentData.senderIban=siban;
+    paymentData.receiverIban=riban;
+    paymentData.senderBankId=sbank;
+    paymentData.receiverBankId=rbank;
+    paymentData.paymentAmt="1000.00";
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -426,14 +426,14 @@ charactersLength));
         method: "POST",
         body: JSON.stringify({
           "Records": [{
-          "senderId": senderId.current.value,
-          "receiverId": receiverId.current.value,
-          "senderIban": senderIban.current.value,
-          "receiverIban": receiverIban.current.value,
-          "senderBankId": senderBankId.current.value,
-          "receiverBankId": receiverBankId.current.value,
-          "paymentAmt": paymentAmt.current.value,
-          "valueDate": valueDate.current.value,
+          "senderId": paymentData.senderId,
+          "receiverId": paymentData.receiverId,
+          "senderIban": paymentData.senderIban,
+          "receiverIban": paymentData.receiverIban,
+          "senderBankId": paymentData.senderBankId,
+          "receiverBankId": paymentData.receiverBankId,
+          "paymentAmt": paymentData.paymentAmt,
+          "valueDate": valuDate,
         }]}),
       });
       let resJson = await res.json();

@@ -448,7 +448,7 @@ function App({ signOut, user }) {
                     "senderBankId": paymentData.senderBankId,
                     "receiverBankId": paymentData.receiverBankId,
                     "paymentAmt": paymentData.paymentAmt,
-                    "valueDate": valudate,
+                    "valueDate": valudate.toLocaleDateString(),
                 }]
             }),
         });
